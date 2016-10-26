@@ -33,6 +33,9 @@ RUN set -x \
                               "${BITBUCKET_INSTALL}/conf/server.xml" \
     && touch -d "@0"          "${BITBUCKET_INSTALL}/conf/server.xml"
 
+COPY "resources/bitbucket.properties.template" "${BITBUCKET_HOME}/shared/"
+RUN chown -R daemon:daemon "${BITBUCKET_HOME}/shared"
+
 # Use the default unprivileged account. This could be considered bad practice
 # on systems where multiple processes end up being executed by 'daemon' but
 # here we only ever run one process anyway.
@@ -48,9 +51,6 @@ EXPOSE 7990 7999
 
 # Set the default working directory as the Bitbucket home directory.
 WORKDIR /var/atlassian/bitbucket
-
-COPY "resources/bitbucket.properties.template" "${BITBUCKET_HOME}/shared/"
-RUN chown -R daemon:daemon "${BITBUCKET_HOME}/shared"
 
 COPY "resources/docker-entrypoint.sh" "/"
 RUN chmod +x /docker-entrypoint.sh
