@@ -1,0 +1,43 @@
+version: '2'
+services:
+
+ bitbucket-postgres:
+  container_name: bitbucket-postgres
+  image: postgres:9.4
+  ports:
+    - "5432:5432"
+  environment:
+    POSTGRES_PASSWORD: "postgres"
+    POSTGRES_ENCODING: "UTF8"
+  volumes:
+    - bitbucket_postgres_data:/var/lib/postgresql/data
+
+ bitbucket:
+  container_name: bitbucket
+  build: .
+  image: atsnantes/adop-bitbucket-dev:latest
+  ports:
+    - "7990:7990"
+  environment:
+    ADOP_PROXYNAME: "192.168.99.100"
+    ADOP_PROXYPORT: "80"
+    ADOP_PROXYSCHEME: "http"
+    BITBUCKET_ROOTPATH: "/bitbucket"
+    DB_HOST: "bitbucket-postgres"
+    DB_POSTGRES_PASSWORD: "postgres"
+    BITBUCKET_DB: "bitbucket"
+    BITBUCKET_DB_USER: "bitbucket"
+    BITBUCKET_DB_PASSWORD: "bitbucket"
+  volumes:
+    - bitbucket_data:/var/atlassian/bitbucket
+    
+volumes:
+  bitbucket_data:
+    driver: local
+  bitbucket_postgres_data:
+    driver: local
+    
+networks:
+  default:
+    external:
+      name: local_network

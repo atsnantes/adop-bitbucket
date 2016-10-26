@@ -1,0 +1,8 @@
+#>*******************************************************
+#> Migrated to database at jdbc:postgresql://bitbucket-postgres:5432/bitbucket
+#> Updated on 2016-10-17T16:06:00.682Z
+#>*******************************************************
+jdbc.driver=org.postgresql.Driver
+jdbc.url=
+jdbc.user=
+jdbc.password=
