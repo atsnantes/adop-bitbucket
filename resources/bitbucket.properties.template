@@ -1,8 +1,11 @@
-#>*******************************************************
-#> Migrated to database at jdbc:postgresql://bitbucket-postgres:5432/bitbucket
-#> Updated on 2016-10-17T16:06:00.682Z
-#>*******************************************************
 jdbc.driver=org.postgresql.Driver
 jdbc.url=
 jdbc.user=
 jdbc.password=
+setup.displayName=Bitbucket
+setup.baseUrl=
+setup.sysadmin.username=admin
+setup.sysadmin.password=@ccenture1
+setup.sysadmin.displayName=Admin
+setup.sysadmin.emailAddress=admin@accenture.com
+

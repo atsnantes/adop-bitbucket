@@ -27,6 +27,7 @@ if [[ -n "${DB_HOST}" && -n "${BITBUCKET_DB}" && -n "${BITBUCKET_DB_USER}" && -n
 		mv "${BITBUCKET_HOME}/shared/bitbucket.properties.template" "${BITBUCKET_HOME}/shared/bitbucket.properties"
 	fi
 	# Update values
+	sed "s|setup.baseUrl=.*|setup.baseUrl=${ADOP_PROXYSCHEME}://${ADOP_PROXYNAME}:${ADOP_PROXYPORT}/${BITBUCKET_ROOTPATH}|g" -i "${BITBUCKET_HOME}/shared/bitbucket.properties"
 	sed "s|jdbc.url=.*|jdbc.url=jdbc:postgresql://${DB_HOST}:5432/${BITBUCKET_DB}|g" -i "${BITBUCKET_HOME}/shared/bitbucket.properties"
 	sed "s|jdbc.user=.*|jdbc.user=${BITBUCKET_DB_USER}|g" -i "${BITBUCKET_HOME}/shared/bitbucket.properties"
 	sed "s|jdbc.password=.*|jdbc.password=${BITBUCKET_DB_PASSWORD}|g" -i "${BITBUCKET_HOME}/shared/bitbucket.properties"
